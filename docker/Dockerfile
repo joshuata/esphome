@@ -194,7 +194,7 @@ ENV \
 
 RUN \
     curl -L https://apt.llvm.org/llvm-snapshot.gpg.key -o /etc/apt/trusted.gpg.d/apt.llvm.org.asc \
-    && echo "deb http://apt.llvm.org/bookworm/ llvm-toolchain-bookworm-18 main" > /etc/apt/sources.list.d/llvm.sources.list \
+    && echo "deb http://apt.llvm.org/bookworm/ llvm-toolchain-bookworm-19 main" > /etc/apt/sources.list.d/llvm.sources.list \
     && apt-get update \
     # Use pinned versions so that we get updates with build caching
     && apt-get install -y --no-install-recommends \
@@ -204,7 +204,7 @@ RUN \
         nano=7.2-1+deb12u1 \
         build-essential=12.9 \
         python3-dev=3.11.2-1+b1 \
-        clang-tidy-18=1:18.1.8~++20240731024826+3b5b5c1ec4a3-1~exp1~20240731144843.145 \
+        clang-tidy-19=1:19.1.7~++20250114103228+cd708029e0b2-1~exp1~20250114103334.78 \
     && rm -rf \
         /tmp/* \
         /var/{cache,log}/* \
