@@ -56,6 +56,7 @@ CHIPSETS = {
     "SK6812": LEDStripTimings(300, 900, 600, 600, 0, 0),
     "APA106": LEDStripTimings(350, 1360, 1360, 350, 0, 0),
     "SM16703": LEDStripTimings(300, 900, 900, 300, 0, 0),
+    "WS2805": LEDStripTimings(300, 750, 750, 750, 0, 300000),
 }
 
 CONF_IS_WRGB = "is_wrgb"
@@ -65,6 +66,7 @@ CONF_BIT1_HIGH = "bit1_high"
 CONF_BIT1_LOW = "bit1_low"
 CONF_RESET_HIGH = "reset_high"
 CONF_RESET_LOW = "reset_low"
+CONF_IS_RGBWW = "is_rgbww"
 
 
 CONFIG_SCHEMA = cv.All(
@@ -89,6 +91,7 @@ CONFIG_SCHEMA = cv.All(
             cv.Optional(CONF_CHIPSET): cv.one_of(*CHIPSETS, upper=True),
             cv.Optional(CONF_IS_RGBW, default=False): cv.boolean,
             cv.Optional(CONF_IS_WRGB, default=False): cv.boolean,
+            cv.Optional(CONF_IS_RGBWW, default=False): cv.boolean,
             cv.Optional(CONF_USE_DMA): cv.All(
                 esp32.only_on_variant(
                     supported=[esp32.const.VARIANT_ESP32S3, esp32.const.VARIANT_ESP32P4]
@@ -164,6 +167,7 @@ async def to_code(config):
     cg.add(var.set_rgb_order(config[CONF_RGB_ORDER]))
     cg.add(var.set_is_rgbw(config[CONF_IS_RGBW]))
     cg.add(var.set_is_wrgb(config[CONF_IS_WRGB]))
+    cg.add(var.set_is_rgbww(config[CONF_IS_RGBWW]))
     cg.add(var.set_use_psram(config[CONF_USE_PSRAM]))
     cg.add(var.set_rmt_symbols(config[CONF_RMT_SYMBOLS]))
     if CONF_USE_DMA in config:
